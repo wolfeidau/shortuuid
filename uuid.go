@@ -13,6 +13,8 @@ const (
 	uuidLen = 16
 )
 
+// MustShorten take one or more uuids and encode them using base58
+// with the encoded values being appended in order.
 func MustShorten(uuidv4s ...string) string {
 
 	short, err := Shorten(uuidv4s...)
@@ -23,6 +25,8 @@ func MustShorten(uuidv4s ...string) string {
 	return short
 }
 
+// Shorten take one or more uuids and encode them using base58
+// with the encoded values being appended in order.
 func Shorten(uuidv4s ...string) (string, error) {
 	buf := new(bytes.Buffer)
 
@@ -46,6 +50,8 @@ func Shorten(uuidv4s ...string) (string, error) {
 	return base58.Encode(buf.Bytes()), nil
 }
 
+// MustUnShorten takes a shortened value and decodes it into on or more uuids with the result
+// being in the original order.
 func MustUnShorten(val string) []string {
 	uuids, err := UnShorten(val)
 	if err != nil {
@@ -55,6 +61,8 @@ func MustUnShorten(val string) []string {
 	return uuids
 }
 
+// UnShorten takes a shortened value and decodes it into on or more uuids with the result
+// being in the original order.
 func UnShorten(val string) ([]string, error) {
 
 	var uuids []string

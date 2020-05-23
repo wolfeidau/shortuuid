@@ -5,7 +5,7 @@ This library uses [base58 encoding](https://en.wikipedia.org/wiki/Base58) to sho
 This library provides a reduction of ~39% in storage of the string representation of these values.
 
 [![GitHub Actions status](https://github.com/wolfeidau/shortuuid/workflows/Go/badge.svg?branch=master)](https://github.com/wolfeidau/shortuuid/actions?query=workflow%3AGo)
-[![Go Report Card](https://goreportcard.com/badge/github.com/wolfeidau/shortuuid)](https://goreportcard.com/report/github.com/wolfeidau/shortuuid) [![Coverage Status](https://coveralls.io/repos/github/wolfeidau/shortuuid/badge.svg?branch=master)](https://coveralls.io/github/wolfeidau/shortuuid?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/wolfeidau/shortuuid)](https://goreportcard.com/report/github.com/wolfeidau/shortuuid) [![Documentation](https://godoc.org/github.com/wolfeidau/shortuuid?status.svg)](https://godoc.org/github.com/wolfeidau/shortuuid) [![Coverage Status](https://coveralls.io/repos/github/wolfeidau/shortuuid/badge.svg?branch=master)](https://coveralls.io/github/wolfeidau/shortuuid?branch=master)
 
 
 # example
