@@ -2,11 +2,11 @@ package shortuuid
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 
 	"github.com/google/uuid"
 	"github.com/mr-tron/base58"
-	"github.com/pkg/errors"
 )
 
 const (
@@ -33,17 +33,17 @@ func Shorten(uuidv4s ...string) (string, error) {
 	for _, u := range uuidv4s {
 		puid, err := uuid.Parse(u)
 		if err != nil {
-			return "", errors.Wrapf(err, "failed to parse uuid: %s", u)
+			return "", fmt.Errorf("failed to parse %s as a uuid: %w", u, err)
 		}
 
 		data, err := puid.MarshalBinary()
 		if err != nil {
-			return "", errors.Wrapf(err, "failed to marshall uuid: %s", u)
+			return "", fmt.Errorf("failed to marshall %s as a uuid: %w", u, err)
 		}
 
 		_, err = buf.Write(data)
 		if err != nil {
-			return "", errors.Wrapf(err, "failed to write uuid: %s", u)
+			return "", fmt.Errorf("failed to write %s as a uuid: %w", u, err)
 		}
 	}
 
@@ -69,11 +69,11 @@ func UnShorten(val string) ([]string, error) {
 
 	data, err := base58.Decode(val)
 	if err != nil {
-		return nil, errors.Wrapf(err, "failed to decode value")
+		return nil, fmt.Errorf("failed to decode value: %w", err)
 	}
 
 	if len(data) == 0 || len(data)%uuidLen != 0 {
-		return nil, errors.Errorf("failed to decode value invalid decoded length: %d", len(data))
+		return nil, fmt.Errorf("failed to decode value invalid decoded length: %d", len(data))
 	}
 
 	buf := make([]byte, 0, uuidLen)
@@ -86,13 +86,13 @@ func UnShorten(val string) ([]string, error) {
 				break
 			}
 			if err != io.ErrUnexpectedEOF {
-				return nil, errors.Wrapf(err, "failed to read uuid value")
+				return nil, fmt.Errorf("failed to read uuid value: %w", err)
 			}
 		}
 
 		u, err := uuid.FromBytes(buf)
 		if err != nil {
-			return nil, errors.Wrapf(err, "failed to read uuid: %s", u)
+			return nil, fmt.Errorf("failed to read %s as a uuid: %w", u, err)
 		}
 
 		uuids = append(uuids, u.String())
